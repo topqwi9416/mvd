@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>МВД — Миграционный пункт | Цифровая платформа</title>
+<style>
+:root {
+  --navy: #1A2744;
+  --navy2: #0F1A30;
+  --blue: #2563EB;
+  --blue-bg: #EFF4FF;
+  --blue-border: #BFCFFF;
+  --accent: #C8341A;
+  --gold: #B8860B;
+  --green: #166534;
+  --green-bg: #F0FDF4;
+  --green-border: #BBF7D0;
+  --amber-bg: #FFFBEB;
+  --amber-border: #FDE68A;
+  --amber-text: #92400E;
+  --red-bg: #FEF2F2;
+  --red-border: #FECACA;
+  --red-text: #991B1B;
+  --surface: #F7F8FA;
+  --border: #E2E6EF;
+  --text: #1A2744;
+  --muted: #5A6480;
+  --white: #FFFFFF;
+  --radius: 10px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--surface); color: var(--text); font-size: 15px; line-height: 1.6; }
+
+/* NAV */
+nav {
+  background: var(--navy2);
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  border-bottom: 3px solid var(--accent);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; }
+.nav-emblem { width: 32px; height: 32px; border-radius: 6px; background: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; color: #fff; }
+.nav-title { font-size: 13px; font-weight: 600; color: #fff; }
+.nav-links { display: flex; list-style: none; }
+.nav-links a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 12px; padding: 0 11px; height: 58px; display: flex; align-items: center; border-bottom: 3px solid transparent; margin-bottom: -3px; transition: all .15s; }
+.nav-links a:hover { color: #fff; border-bottom-color: var(--gold); }
+.nav-right { display: flex; align-items: center; gap: 10px; }
+.nav-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 5px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; transition: background .15s; }
+.nav-btn:hover { background: rgba(255,255,255,0.2); }
+
+/* HERO */
+.hero { background: var(--navy); padding: 56px 2rem 48px; text-align: center; color: #fff; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; font-size: 12px; padding: 5px 14px; color: rgba(255,255,255,0.85); margin-bottom: 20px; }
+.hero h1 { font-size: clamp(22px,3.5vw,36px); font-weight: 700; line-height: 1.2; max-width: 620px; margin: 0 auto 14px; }
+.hero-sub { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 480px; margin: 0 auto 36px; }
+.hero-stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+.hero-stat .n { font-size: 28px; font-weight: 700; color: #F59E0B; }
+.hero-stat .l { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 3px; }
+
+/* SECTIONS NAV PILLS */
+.sec-nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; gap: 0; overflow-x: auto; }
+.sec-nav a { font-size: 12px; color: var(--muted); text-decoration: none; padding: 12px 14px; white-space: nowrap; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all .15s; }
+.sec-nav a:hover, .sec-nav a.active { color: var(--navy); border-bottom-color: var(--blue); }
+
+/* SECTIONS */
+.section { padding: 52px 2rem; max-width: 1000px; margin: 0 auto; }
+.section + .section { border-top: 1px solid var(--border); }
+.sec-wrap { background: var(--white); }
+.sec-wrap-alt { background: var(--surface); }
+.sec-num { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.section h2 { font-size: 24px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.sec-intro { color: var(--muted); font-size: 14px; margin-bottom: 28px; max-width: 580px; }
+
+/* CARDS */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
+.card-on-alt { background: var(--surface); }
+.card-icon { font-size: 22px; margin-bottom: 10px; }
+.card h3 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 5px; }
+.card p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+/* STEPS */
+.steps { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--white); }
+.step { display: flex; gap: 14px; padding: 16px 20px; border-bottom: 1px solid var(--border); align-items: flex-start; }
+.step:last-child { border-bottom: none; }
+.step-n { min-width: 28px; height: 28px; background: var(--navy); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; margin-top: 2px; }
+.step-n.done { background: var(--green); }
+.step-n.pending { background: var(--muted); }
+.step h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
+.step p { font-size: 13px; color: var(--muted); }
+
+/* BADGES */
+.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.badge-blue { background: var(--blue-bg); color: #1D4ED8; border: 1px solid var(--blue-border); }
+.badge-green { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+.badge-amber { background: var(--amber-bg); color: var(--amber-text); border: 1px solid var(--amber-border); }
+.badge-red { background: var(--red-bg); color: var(--red-text); border: 1px solid var(--red-border); }
+
+/* CODE */
+.code-block { background: #0F1A30; color: #94A3B8; font-family: 'Consolas','Courier New',monospace; font-size: 12px; padding: 18px; border-radius: var(--radius); line-height: 1.7; overflow-x: auto; white-space: pre; margin-top: 14px; }
+.code-block .c { color: #475569; }
+.code-block .k { color: #7DD3FC; }
+.code-block .v { color: #86EFAC; }
+.code-block .s { color: #FCA5A5; }
+
+/* TWO COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+@media(max-width:680px) { .two-col { grid-template-columns: 1fr; } .nav-links { display: none; } }
+
+/* TABLE */
+.table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.table th { background: var(--navy); color: #fff; padding: 10px 14px; text-align: left; font-weight: 600; font-size: 12px; }
+.table th:first-child { border-radius: 8px 0 0 0; }
+.table th:last-child { border-radius: 0 8px 0 0; }
+.table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.table tr:last-child td { border-bottom: none; }
+.table tr:nth-child(even) td { background: var(--surface); }
+
+/* STAT CARDS */
+.stat-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 20px; }
+.stat-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; text-align: center; }
+.stat-num { font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1; }
+.stat-lbl { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+/* CHART */
+.chart-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; }
+.chart-title { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 14px; }
+.bars { display: flex; align-items: flex-end; gap: 8px; height: 100px; }
+.bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.bar-fill { width: 100%; border-radius: 4px 4px 0 0; background: var(--blue); transition: height .3s; cursor: pointer; position: relative; }
+.bar-fill:hover { background: var(--navy); }
+.bar-fill .bar-tip { display: none; position: absolute; top: -28px; left: 50%; transform: translateX(-50%); background: var(--navy); color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 4px; white-space: nowrap; }
+.bar-fill:hover .bar-tip { display: block; }
+.bar-lbl { font-size: 10px; color: var(--muted); }
+
+/* FORM */
+.form-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+.progress-bar { display: flex; gap: 4px; margin-bottom: 20px; }
+.pb-step { height: 4px; flex: 1; border-radius: 2px; background: var(--border); transition: background .3s; }
+.pb-step.done { background: var(--navy); }
+.pb-step.active { background: var(--blue); }
+.pb-label { font-size: 12px; color: var(--muted); margin-bottom: 18px; }
+.form-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+.form-group label { font-size: 13px; font-weight: 500; color: var(--navy); }
+.form-group input, .form-group select { border: 1px solid var(--border); border-radius: 7px; padding: 9px 12px; font-size: 14px; color: var(--text); background: var(--surface); width: 100%; transition: border-color .15s; outline: none; }
+.form-group input:focus, .form-group select:focus { border-color: var(--blue); background: #fff; }
+.form-group input.error { border-color: #EF4444; }
+.form-error { font-size: 12px; color: #EF4444; display: none; }
+.form-error.show { display: block; }
+.form-hint { font-size: 12px; color: var(--muted); }
+.btn { padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: all .15s; }
+.btn-primary { background: var(--navy); color: #fff; }
+.btn-primary:hover { background: #253561; }
+.btn-secondary { background: var(--surface); color: var(--navy); border: 1px solid var(--border); }
+.btn-secondary:hover { background: var(--border); }
+.btn-success { background: var(--green); color: #fff; }
+.form-actions { display: flex; gap: 10px; margin-top: 8px; }
+.form-success { display: none; text-align: center; padding: 20px; }
+.form-success.show { display: block; }
+.success-icon { font-size: 40px; margin-bottom: 10px; }
+.success-title { font-size: 16px; font-weight: 600; color: var(--green); margin-bottom: 6px; }
+.success-text { font-size: 13px; color: var(--muted); }
+
+/* BACKUP LOG */
+.log-wrap { background: #0F1A30; border-radius: var(--radius); padding: 16px; font-family: 'Consolas','Courier New',monospace; font-size: 12px; line-height: 1.8; max-height: 200px; overflow-y: auto; }
+.log-line { display: flex; gap: 10px; }
+.log-time { color: #475569; min-width: 80px; }
+.log-ok { color: #86EFAC; }
+.log-warn { color: #FCA5A5; }
+.log-info { color: #7DD3FC; }
+
+/* ARCH */
+.arch { background: var(--navy2); border-radius: var(--radius); padding: 24px; }
+.arch-layer { border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 12px 16px; margin-bottom: 10px; }
+.arch-layer-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #F59E0B; font-weight: 700; margin-bottom: 8px; }
+.arch-nodes { display: flex; gap: 8px; flex-wrap: wrap; }
+.arch-node { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 5px 12px; font-size: 12px; color: rgba(255,255,255,0.85); }
+.arch-arrow { text-align: center; color: rgba(255,255,255,0.25); font-size: 16px; margin: 4px 0; }
+
+/* DARK MODE */
+body.dark { background: #0F1A30; color: #E2E8F0; }
+body.dark .sec-wrap, body.dark .card, body.dark .steps, body.dark .form-wrap, body.dark .stat-card, body.dark .chart-wrap { background: #1A2744; border-color: #253561; }
+body.dark .sec-wrap-alt { background: #0F1A30; }
+body.dark .section h2 { color: #E2E8F0; }
+body.dark .sec-intro { color: #94A3B8; }
+body.dark .card h3, body.dark .step h4 { color: #E2E8F0; }
+body.dark .form-group input, body.dark .form-group select { background: #0F1A30; border-color: #253561; color: #E2E8F0; }
+body.dark .btn-secondary { background: #253561; color: #E2E8F0; border-color: #334175; }
+body.dark .table th { background: #253561; }
+body.dark .table td { border-color: #253561; }
+body.dark .table tr:nth-child(even) td { background: #1A2744; }
+body.dark .sec-nav { background: #1A2744; border-color: #253561; }
+body.dark .pb-step { background: #253561; }
+
+/* COOKIE */
+.cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: var(--navy); color: #fff; padding: 16px 2rem; display: flex; align-items: center; justify-content: space-between; gap: 16px; z-index: 1000; border-top: 3px solid var(--accent); font-size: 13px; }
+.cookie-banner.hidden { display: none; }
+.cookie-text { flex: 1; color: rgba(255,255,255,0.85); }
+.cookie-text a { color: #93C5FD; }
+.cookie-actions { display: flex; gap: 8px; }
+
+/* FOOTER */
+footer { background: var(--navy2); color: rgba(255,255,255,0.6); padding: 32px 2rem; text-align: center; border-top: 3px solid var(--accent); font-size: 13px; }
+footer strong { color: #fff; }
+.footer-links { display: flex; justify-content: center; gap: 20px; margin-top: 10px; }
+.footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 12px; }
+.footer-links a:hover { color: rgba(255,255,255,0.85); }
+
+/* UTILS */
+.flex-between { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.flex-gap { display: flex; gap: 10px; flex-wrap: wrap; }
+.mt-16 { margin-top: 16px; }
+.mt-20 { margin-top: 20px; }
+.tag-list { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+</style>
+</head>
+<body>
+
+<!-- COOKIE BANNER (152-ФЗ) -->
+<div class="cookie-banner" id="cookieBanner">
+  <div class="cookie-text">
+    Сайт использует файлы cookie для сбора статистики посещаемости. Данные обрабатываются на серверах в РФ в соответствии с <a href="#s9">152-ФЗ</a> и <a href="#privacy">Политикой конфиденциальности</a>.
+  </div>
+  <div class="cookie-actions">
+    <button class="btn btn-secondary" onclick="declineCookies()">Отказать</button>
+    <button class="btn btn-primary" onclick="acceptCookies()">Принять</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-emblem">МВД</div>
+    <span class="nav-title">Миграционный пункт</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#s1">Хостинг</a></li>
+    <li><a href="#s2">СКУД</a></li>
+    <li><a href="#s3">Статистика</a></li>
+    <li><a href="#s4">Юзабилити</a></li>
+    <li><a href="#s5">Маркетинг</a></li>
+    <li><a href="#s6">Лендинг</a></li>
+    <li><a href="#s7">Bitrix</a></li>
+    <li><a href="#s8">Astro</a></li>
+    <li><a href="#s9">152-ФЗ</a></li>
+  </ul>
+  <div class="nav-right">
+    <span id="uptimeLabel" style="font-size:11px;color:#86EFAC;">● Онлайн</span>
+    <button class="nav-btn" onclick="toggleDark()">🌙 Тема</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🏛️ МВД России · Миграционный учёт · Практика 2026</div>
+  <h1>Цифровая платформа постановки иностранных граждан на учёт</h1>
+  <p class="hero-sub">Постановка на учёт по месту пребывания и жительства. Надёжно, прозрачно, в соответствии с 152-ФЗ.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="n" id="counterApps">0</div><div class="l">заявлений принято</div></div>
+    <div class="hero-stat"><div class="n" id="counterUptime">99.8%</div><div class="l">uptime за месяц</div></div>
+    <div class="hero-stat"><div class="n" id="counterVisitors">0</div><div class="l">посетителей сегодня</div></div>
+    <div class="hero-stat"><div class="n">HTTPS</div><div class="l">Let's Encrypt · A+</div></div>
+  </div>
+</div>
+
+<!-- SEC NAV -->
+<div class="sec-nav">
+  <a href="#s1">01 Хостинг</a>
+  <a href="#s2">02 Резерв. СКУД</a>
+  <a href="#s3">03 Статистика</a>
+  <a href="#s4">04 Юзабилити</a>
+  <a href="#s5">05 Маркетинг</a>
+  <a href="#s6">06 Лендинг</a>
+  <a href="#s7">07 1C-Bitrix</a>
+  <a href="#s8">08 Astro+CMS</a>
+  <a href="#s9">09 152-ФЗ</a>
+</div>
+
+<!-- ===== S1: HOSTING ===== -->
+<div class="sec-wrap" id="s1">
+<div class="section">
+  <div class="sec-num">01 · Восстановление из резервной копии, хостинг, HTTPS</div>
+  <h2>Развёртывание на хостинге и защита HTTPS</h2>
+  <p class="sec-intro">Сайт развёрнут на российском VPS (Selectel), восстановлен из резервной копии. Трафик защищён сертификатом TLS — оценка SSL Labs A+.</p>
+
+  <div class="two-col">
+    <div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n done">✓</div>
+          <div>
+            <h4>Резервная копия создана</h4>
+            <p>mysqldump + tar.gz файлов → зашифрован AES-256 → выгружен в S3 (Россия)</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n done">✓</div>
+          <div>
+            <h4>VPS в России — Selectel</h4>
+            <p>Ubuntu 22.04 LTS, 2 vCPU, 4 ГБ RAM. Локализация данных по 152-ФЗ.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n done">✓</div>
+          <div>
+            <h4>Nginx + PHP-FPM настроен</h4>
+            <p>Виртуальный хост, import БД, проверка работоспособности пройдена</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n done">✓</div>
+          <div>
+            <h4>HTTPS / Let's Encrypt</h4>
+            <p>certbot auto-renew, HSTS, OCSP Stapling, редирект HTTP→HTTPS</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:12px;">
+        <h3 style="margin-bottom:12px;">Статус сервера — в реальном времени</h3>
+        <div id="serverStatus">
+          <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border);">
+            <span>HTTPS сертификат</span><span class="badge badge-green">✓ Активен</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border);">
+            <span>Nginx</span><span class="badge badge-green">✓ Работает</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border);">
+            <span>MySQL</span><span class="badge badge-green">✓ Работает</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border);">
+            <span>Резервная копия</span><span id="lastBackup" class="badge badge-blue">Сегодня 02:00</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;">
+            <span>Uptime</span><span class="badge badge-green" id="uptimeVal">99.8%</span>
+          </div>
+        </div>
+        <button class="btn btn-primary mt-16" style="width:100%" onclick="checkServer()">🔄 Проверить статус</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="code-block"><span class="c"># Восстановление из резервной копии</span>
+<span class="k">openssl</span> enc -d -aes-256-cbc -in backup_20260615.enc -out backup.sql.gz -pass file:/etc/bk.key
+<span class="k">gunzip</span> backup.sql.gz
+<span class="k">mysql</span> -u root -p migration_db < backup.sql
+
+<span class="c"># Установка TLS-сертификата</span>
+<span class="k">certbot</span> --nginx -d migrant.mvd-local.ru --non-interactive --agree-tos
+<span class="k">systemctl</span> reload nginx
+
+<span class="c"># Автопродление (cron)</span>
+<span class="s">0 3 * * * certbot renew --quiet && systemctl reload nginx</span></div>
+</div>
+</div>
+
+<!-- ===== S2: BACKUP СКУД ===== -->
+<div class="sec-wrap-alt" id="s2">
+<div class="section">
+  <div class="sec-num">02 · Резервное копирование БД СКУД</div>
+  <h2>Автоматизированное резервирование базы данных СКУД</h2>
+  <p class="sec-intro">СКУД (система контроля и управления доступом) — ежедневный полный дамп + инкремент каждые 6 часов. Шифрование AES-256, реплика в S3, тест восстановления еженедельно.</p>
+
+  <div class="two-col">
+    <div>
+      <div class="cards" style="grid-template-columns:1fr;gap:10px;">
+        <div class="card">
+          <div class="card-icon">🗄️</div>
+          <h3>Расписание резервирования</h3>
+          <p>Полный дамп в 02:00 ежедневно. Инкрементальный — 08:00, 14:00, 20:00. Ротация 30 дней.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔐</div>
+          <h3>Шифрование и хранение</h3>
+          <p>AES-256-CBC перед выгрузкой. Локально /backups/ + реплика в Yandex Object Storage (Россия).</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">✅</div>
+          <h3>Тест восстановления</h3>
+          <p>Каждое воскресенье 04:00 — автоматический разворот в sandbox, проверка ключевых таблиц.</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="flex-between">
+        <h3 style="font-size:14px;font-weight:600;">Журнал резервного копирования</h3>
+        <button class="btn btn-secondary" style="font-size:12px;padding:5px 12px;" onclick="runBackup()">▶ Запустить дамп</button>
+      </div>
+      <div class="log-wrap" id="backupLog">
+        <div class="log-line"><span class="log-time">02:00:01</span><span class="log-ok">[OK] Полный дамп skud_db начат</span></div>
+        <div class="log-line"><span class="log-time">02:01:44</span><span class="log-ok">[OK] Дамп завершён: 247 МБ</span></div>
+        <div class="log-line"><span class="log-time">02:01:45</span><span class="log-info">[INFO] Шифрование AES-256...</span></div>
+        <div class="log-line"><span class="log-time">02:02:03</span><span class="log-ok">[OK] Файл зашифрован</span></div>
+        <div class="log-line"><span class="log-time">02:02:04</span><span class="log-info">[INFO] Выгрузка в S3...</span></div>
+        <div class="log-line"><span class="log-time">02:03:12</span><span class="log-ok">[OK] S3 upload: s3://mvd-backup/skud/20260627.enc</span></div>
+        <div class="log-line"><span class="log-time">02:03:13</span><span class="log-ok">[OK] Удалены файлы старше 30 дней: 2 шт.</span></div>
+        <div class="log-line"><span class="log-time">08:00:00</span><span class="log-info">[INFO] Инкрементальный дамп...</span></div>
+        <div class="log-line"><span class="log-time">08:00:38</span><span class="log-ok">[OK] Инкремент: 14 МБ → S3</span></div>
+      </div>
+      <div class="mt-16" style="display:flex;gap:10px;">
+        <div class="stat-card" style="flex:1;text-align:center;padding:12px;">
+          <div class="stat-num" style="font-size:20px;color:var(--green);" id="backupCount">9</div>
+          <div class="stat-lbl">резервных копий</div>
+        </div>
+        <div class="stat-card" style="flex:1;text-align:center;padding:12px;">
+          <div class="stat-num" style="font-size:20px;" id="backupSize">2.1 ГБ</div>
+          <div class="stat-lbl">общий объём</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== S3: ANALYTICS ===== -->
+<div class="sec-wrap" id="s3">
+<div class="section">
+  <div class="sec-num">03 · Анализ эффективности — сбор статистики</div>
+  <h2>Дашборд статистики посещаемости и обращений</h2>
+  <p class="sec-intro">Matomo self-hosted — данные не покидают серверы РФ. Метрики: заявления, отказы, среднее время обработки, загрузка по дням.</p>
+
+  <div class="stat-cards">
+    <div class="stat-card">
+      <div class="stat-num" id="s3apps">312</div>
+      <div class="stat-lbl">заявлений сегодня</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--green);" id="s3uptime">99.8%</div>
+      <div class="stat-lbl">доступность сайта</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--gold);" id="s3time">14 мин</div>
+      <div class="stat-lbl">среднее время обработки</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="flex-between">
+      <div class="chart-title">Заявлений по дням недели</div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-secondary" style="font-size:11px;padding:4px 10px;" onclick="updateChart('week')">Неделя</button>
+        <button class="btn btn-secondary" style="font-size:11px;padding:4px 10px;" onclick="updateChart('month')">Месяц</button>
+      </div>
+    </div>
+    <div class="bars" id="chartBars"></div>
+    <div style="display:flex;gap:8px;margin-top:6px;" id="chartLabels"></div>
+  </div>
+
+  <div class="two-col mt-20">
+    <div class="card">
+      <h3 style="margin-bottom:12px;">Источники обращений</h3>
+      <div id="sourceList"></div>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:12px;">Устройства посетителей</h3>
+      <div id="deviceList"></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== S4: USABILITY ===== -->
+<div class="sec-wrap-alt" id="s4">
+<div class="section">
+  <div class="sec-num">04 · Улучшение корпоративного стиля — юзабилити по Кругу</div>
+  <h2>Форма постановки на учёт — принципы «Не заставляйте меня думать»</h2>
+  <p class="sec-intro">Прогресс-бар, понятные подписи, валидация с инструкцией по исправлению, минимум шагов, автофокус, очевидные кнопки.</p>
+
+  <div class="two-col">
+    <div class="form-wrap" id="appForm">
+      <div class="progress-bar" id="progressBar">
+        <div class="pb-step active"></div>
+        <div class="pb-step"></div>
+        <div class="pb-step"></div>
+      </div>
+      <div class="pb-label" id="stepLabel">Шаг 1 из 3 — Тип заявителя</div>
+
+      <!-- Step 1 -->
+      <div id="step1">
+        <div class="form-group">
+          <label>Кто подаёт уведомление?</label>
+          <select id="applicantType">
+            <option value="">— выберите —</option>
+            <option value="foreign">Иностранный гражданин</option>
+            <option value="employer">Работодатель / принимающая сторона</option>
+            <option value="owner">Собственник жилья</option>
+          </select>
+          <span class="form-error" id="err-type">Выберите тип заявителя</span>
+        </div>
+        <div class="form-group">
+          <label>Цель постановки на учёт</label>
+          <select id="purposeType">
+            <option value="">— выберите —</option>
+            <option value="residence">Место жительства</option>
+            <option value="stay">Место пребывания</option>
+          </select>
+          <span class="form-error" id="err-purpose">Укажите цель</span>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" onclick="nextStep(1)">Далее →</button>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div id="step2" style="display:none;">
+        <div class="form-group">
+          <label>Серия и номер паспорта</label>
+          <input type="text" id="passport" placeholder="1234 567890" maxlength="11">
+          <span class="form-hint">4 цифры серии, пробел, 6 цифр номера</span>
+          <span class="form-error" id="err-passport">Введите серию (4 цифры) и номер (6 цифр)</span>
+        </div>
+        <div class="form-group">
+          <label>Дата рождения</label>
+          <input type="date" id="birthDate">
+          <span class="form-error" id="err-birth">Укажите дату рождения</span>
+        </div>
+        <div class="form-group">
+          <label>Гражданство</label>
+          <select id="citizenship">
+            <option value="">— выберите —</option>
+            <option value="UZ">Узбекистан</option>
+            <option value="TJ">Таджикистан</option>
+            <option value="KG">Киргизия</option>
+            <option value="AM">Армения</option>
+            <option value="AZ">Азербайджан</option>
+            <option value="BY">Беларусь</option>
+            <option value="OTHER">Другое</option>
+          </select>
+          <span class="form-error" id="err-citizenship">Укажите гражданство</span>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-secondary" onclick="prevStep(2)">← Назад</button>
+          <button class="btn btn-primary" onclick="nextStep(2)">Далее →</button>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div id="step3" style="display:none;">
+        <div class="form-group">
+          <label>Адрес места пребывания в РФ</label>
+          <input type="text" id="address" placeholder="г. Москва, ул. Примерная, д. 1, кв. 5">
+          <span class="form-error" id="err-address">Укажите адрес</span>
+        </div>
+        <div class="form-group">
+          <label>Срок пребывания — по</label>
+          <input type="date" id="stayUntil">
+          <span class="form-error" id="err-stay">Укажите дату окончания</span>
+        </div>
+        <div class="form-group">
+          <label>Email для отрывного талона</label>
+          <input type="email" id="emailField" placeholder="example@mail.ru">
+          <span class="form-hint">Пришлём подтверждение и PDF-талон</span>
+          <span class="form-error" id="err-email">Введите корректный email</span>
+        </div>
+        <div style="background:var(--blue-bg);border:1px solid var(--blue-border);border-radius:8px;padding:12px;font-size:13px;margin-bottom:14px;">
+          ℹ️ Подавая уведомление, вы соглашаетесь с <a href="#s9" style="color:var(--blue)">обработкой персональных данных</a> в соответствии с 152-ФЗ.
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-secondary" onclick="prevStep(3)">← Назад</button>
+          <button class="btn btn-success" onclick="submitForm()">✓ Подать уведомление</button>
+        </div>
+      </div>
+
+      <!-- Success -->
+      <div class="form-success" id="formSuccess">
+        <div class="success-icon">✅</div>
+        <div class="success-title">Уведомление принято!</div>
+        <div class="success-text">Номер заявки: <strong id="ticketNum"></strong><br>Отрывной талон отправлен на e-mail.<br>Обработка займёт 1–3 рабочих дня.</div>
+        <button class="btn btn-primary mt-16" onclick="resetForm()">Подать ещё одно</button>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:14px;">Принципы юзабилити по Кругу</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n done">✓</div>
+          <div><h4>Ясный прогресс</h4><p>Пользователь видит где он и сколько шагов осталось</p></div>
+        </div>
+        <div class="step">
+          <div class="step-n done">✓</div>
+          <div><h4>Ошибки с инструкцией</h4><p>Не «неверный формат», а «введите 4 цифры серии и 6 цифр номера»</p></div>
+        </div>
+        <div class="step">
+          <div class="step-n done">✓</div>
+          <div><h4>Минимум полей</h4><p>Только необходимое на каждом шаге, без лишнего</p></div>
+        </div>
+        <div class="step">
+          <div class="step-n done">✓</div>
+          <div><h4>Очевидные CTA</h4><p>«Подать уведомление» — не «Отправить форму»</p></div>
+        </div>
+        <div class="step">
+          <div class="step-n done">✓</div>
+          <div><h4>Подтверждение действия</h4><p>Номер заявки и уведомление на email сразу после подачи</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== S5: MARKETING ===== -->
+<div class="sec-wrap" id="s5">
+<div class="section">
+  <div class="sec-num">05 · Анализ предметной области — маркетинговая платформа</div>
+  <h2>Целевая аудитория и требования к платформе</h2>
+  <p class="sec-intro">Четыре сегмента пользователей с разными потребностями. Платформа должна закрывать каждый сегмент отдельным сценарием.</p>
+
+  <div class="cards" style="margin-bottom:24px;">
+    <div class="card">
+      <div class="card-icon">👤</div>
+      <h3>Иностранный гражданин</h3>
+      <p>Нужно встать на учёт без ошибок. Инструкция на родном языке, пошаговая форма, подтверждение на email.</p>
+      <div style="margin-top:10px;"><span class="badge badge-blue">RU / UZ / TJ / KG</span></div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏢</div>
+      <h3>Работодатель</h3>
+      <p>Уведомить о прибытии сотрудников, массовая загрузка через CSV, отчётность по всем работникам.</p>
+      <div style="margin-top:10px;"><span class="badge badge-green">API / CSV</span></div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏠</div>
+      <h3>Собственник жилья</h3>
+      <p>Зарегистрировать жильца как принимающая сторона, получить уведомление о сроках.</p>
+      <div style="margin-top:10px;"><span class="badge badge-amber">Уведомления</span></div>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚖️</div>
+      <h3>Юридические лица</h3>
+      <p>Массовые уведомления, интеграция с HR-системой, отчёты для проверяющих органов.</p>
+      <div style="margin-top:10px;"><span class="badge badge-red">ЕСИА / REST API</span></div>
+    </div>
+  </div>
+
+  <h3 style="font-size:16px;font-weight:600;margin-bottom:14px;">Требования к маркетинговой платформе</h3>
+  <table class="table">
+    <thead><tr><th>Требование</th><th>Реализация</th><th>Статус</th></tr></thead>
+    <tbody>
+      <tr><td>SEO под запросы «постановка на учёт»</td><td>Meta-теги, структурированные данные, sitemap.xml</td><td><span class="badge badge-green">✓</span></td></tr>
+      <tr><td>Мультиязычность (RU/UZ/TJ/KG)</td><td>Переключатель языка, отдельные URL-страницы</td><td><span class="badge badge-amber">В работе</span></td></tr>
+      <tr><td>Доступность WCAG 2.1 AA</td><td>ARIA-атрибуты, контрастность, keyboard-навигация</td><td><span class="badge badge-green">✓</span></td></tr>
+      <tr><td>Интеграция с ЕСИА / Госуслуги</td><td>OAuth 2.0 через портал Госуслуг</td><td><span class="badge badge-blue">Планируется</span></td></tr>
+      <tr><td>Электронная очередь</td><td>Виджет записи на приём, SMS-напоминания</td><td><span class="badge badge-amber">В работе</span></td></tr>
+      <tr><td>Адаптивность 320px–1920px</td><td>CSS Grid + media queries, тест на мобильных</td><td><span class="badge badge-green">✓</span></td></tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+<!-- ===== S6: LANDING ===== -->
+<div class="sec-wrap-alt" id="s6">
+<div class="section">
+  <div class="sec-num">06 · Маркетинговый лендинг на Webflow/Framer</div>
+  <h2>Лендинг для информирования и привлечения граждан</h2>
+  <p class="sec-intro">Одностраничный сайт на Webflow: Hero → Процесс → Документы → FAQ → Запись на приём. Выбор Webflow за встроенную CMS для частого обновления расписания.</p>
+
+  <div style="border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--white);">
+    <!-- Webflow preview -->
+    <div style="background:#0F1A30;padding:28px 24px;text-align:center;color:#fff;">
+      <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:10px;">Постановка на учёт иностранных граждан</div>
+      <div style="font-size:22px;font-weight:700;margin-bottom:8px;">Без очереди — уведомите онлайн</div>
+      <div style="font-size:14px;color:rgba(255,255,255,0.65);margin-bottom:20px;">Подайте уведомление за 7 минут. Отрывной талон — на e-mail.</div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})">Подать уведомление</button>
+        <button class="btn btn-secondary" style="border-color:rgba(255,255,255,0.3);color:#fff;">Узнать о документах</button>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);">
+      <div style="background:var(--white);padding:20px;text-align:center;">
+        <div style="font-size:28px;margin-bottom:8px;">📋</div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy);margin-bottom:4px;">Заполните форму</div>
+        <div style="font-size:12px;color:var(--muted);">Паспорт, миграционная карта, адрес</div>
+      </div>
+      <div style="background:var(--white);padding:20px;text-align:center;">
+        <div style="font-size:28px;margin-bottom:8px;">📤</div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy);margin-bottom:4px;">Загрузите документы</div>
+        <div style="font-size:12px;color:var(--muted);">Скан или фото в PDF/JPG</div>
+      </div>
+      <div style="background:var(--white);padding:20px;text-align:center;">
+        <div style="font-size:28px;margin-bottom:8px;">✅</div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy);margin-bottom:4px;">Получите талон</div>
+        <div style="font-size:12px;color:var(--muted);">На e-mail или лично в пункте</div>
+      </div>
+    </div>
+    <div style="padding:20px 24px;background:var(--surface);border-top:1px solid var(--border);">
+      <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:12px;">FAQ — часто задаваемые вопросы</div>
+      <div id="faqList"></div>
+    </div>
+  </div>
+
+  <div class="two-col mt-20">
+    <div class="card">
+      <h3>Webflow</h3>
+      <p style="margin-top:6px;font-size:13px;color:var(--muted);">Встроенная CMS, редактирование расписания без разработчика, хостинг включён, SSL автоматически.</p>
+      <div style="margin-top:10px;"><span class="badge badge-green">✓ Выбран</span></div>
+    </div>
+    <div class="card">
+      <h3>Framer</h3>
+      <p style="margin-top:6px;font-size:13px;color:var(--muted);">Богатая анимация, быстрое прототипирование. Слабее в части CMS и частого обновления контента.</p>
+      <div style="margin-top:10px;"><span class="badge badge-amber">Альтернатива</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== S7: BITRIX ===== -->
+<div class="sec-wrap" id="s7">
+<div class="section">
+  <div class="sec-num">07 · Адаптация на 1C-Bitrix</div>
+  <h2>Корпоративный портал на 1C-Bitrix</h2>
+  <p class="sec-intro">Основной сайт организации: кастомный шаблон под фирменный стиль МВД, инфоблоки для документов и расписания, веб-формы, LDAP SSO.</p>
+
+  <div style="border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--white);">
+    <div style="background:var(--surface);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:8px;">
+      <div style="width:10px;height:10px;border-radius:50%;background:#f0958580;"></div>
+      <div style="width:10px;height:10px;border-radius:50%;background:#ef9f2780;"></div>
+      <div style="width:10px;height:10px;border-radius:50%;background:#97c45980;"></div>
+      <span style="font-size:11px;color:var(--muted);margin-left:8px;">1C-Bitrix — Административная панель</span>
+    </div>
+    <div style="display:grid;grid-template-columns:180px 1fr;min-height:220px;">
+      <div style="background:#F1F3F6;border-right:1px solid var(--border);padding:12px 0;">
+        <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:0 14px;margin-bottom:8px;">Контент</div>
+        <div id="bxMenu">
+          <div class="bx-item active" data-tab="docs" onclick="switchBxTab('docs',this)">📄 Инфоблок: Документы</div>
+          <div class="bx-item" data-tab="schedule" onclick="switchBxTab('schedule',this)">📅 Инфоблок: Расписание</div>
+          <div class="bx-item" data-tab="forms" onclick="switchBxTab('forms',this)">📬 Веб-формы</div>
+          <div class="bx-item" data-tab="ldap" onclick="switchBxTab('ldap',this)">🔑 LDAP / SSO</div>
+        </div>
+      </div>
+      <div style="padding:16px;" id="bxContent">
+        <div id="bx-docs">
+          <div style="font-size:15px;font-weight:600;color:var(--navy);margin-bottom:12px;">Инфоблок: Документы</div>
+          <table class="table" style="font-size:12px;">
+            <thead><tr><th>Название</th><th>Тип</th><th>Обновлён</th><th>Действие</th></tr></thead>
+            <tbody>
+              <tr><td>Форма уведомления ИГ</td><td>PDF</td><td>15.06.2026</td><td><span class="badge badge-green">Опубликован</span></td></tr>
+              <tr><td>Перечень документов</td><td>PDF</td><td>01.06.2026</td><td><span class="badge badge-green">Опубликован</span></td></tr>
+              <tr><td>Памятка для принимающей стороны</td><td>DOCX</td><td>20.05.2026</td><td><span class="badge badge-green">Опубликован</span></td></tr>
+              <tr><td>График приёма — июль 2026</td><td>PDF</td><td>25.06.2026</td><td><span class="badge badge-amber">Черновик</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="bx-schedule" style="display:none;">
+          <div style="font-size:15px;font-weight:600;color:var(--navy);margin-bottom:12px;">График приёма граждан</div>
+          <table class="table" style="font-size:12px;">
+            <thead><tr><th>День</th><th>Время</th><th>Сотрудник</th><th>Окошек</th></tr></thead>
+            <tbody>
+              <tr><td>Понедельник</td><td>09:00–13:00</td><td>Иванова А.В.</td><td>12</td></tr>
+              <tr><td>Вторник</td><td>14:00–18:00</td><td>Петров С.И.</td><td>12</td></tr>
+              <tr><td>Среда</td><td>09:00–13:00</td><td>Сидорова Н.К.</td><td>12</td></tr>
+              <tr><td>Четверг</td><td>14:00–18:00</td><td>Козлов Р.А.</td><td>12</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="bx-forms" style="display:none;">
+          <div style="font-size:15px;font-weight:600;color:var(--navy);margin-bottom:12px;">Веб-формы (Bitrix)</div>
+          <div class="cards" style="grid-template-columns:1fr 1fr;">
+            <div class="card"><h3>Обращение гражданина</h3><p style="font-size:12px;">47 заявок за месяц. Уведомления на email сотрудника.</p></div>
+            <div class="card"><h3>Запись на приём</h3><p style="font-size:12px;">213 записей за месяц. Интеграция с электронной очередью.</p></div>
+          </div>
+        </div>
+        <div id="bx-ldap" style="display:none;">
+          <div style="font-size:15px;font-weight:600;color:var(--navy);margin-bottom:12px;">LDAP / Single Sign-On</div>
+          <div class="steps">
+            <div class="step"><div class="step-n done">✓</div><div><h4>Active Directory интеграция</h4><p>Сотрудники входят через доменный аккаунт МВД</p></div></div>
+            <div class="step"><div class="step-n done">✓</div><div><h4>Группы и права доступа</h4><p>Редакторы, операторы, администраторы — отдельные роли</p></div></div>
+            <div class="step"><div class="step-n done">✓</div><div><h4>REST API → ЕСИА</h4><p>Граждане входят через Госуслуги (OAuth 2.0)</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== S8: ASTRO ===== -->
+<div class="sec-wrap-alt" id="s8">
+<div class="section">
+  <div class="sec-num">08 · Контент-ориентированный дизайн на Astro + Headless CMS</div>
+  <h2>Новостной и контентный сайт на Astro + Sanity</h2>
+  <p class="sec-intro">Astro 4 — статические страницы с частичной гидратацией (Islands). Sanity Studio — редактор для сотрудников без разработчика. Сборка по вебхуку за 1–2 мин.</p>
+
+  <div style="border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--white);">
+    <div style="display:grid;grid-template-columns:220px 1fr;min-height:240px;">
+      <div style="background:#F8FAFC;border-right:1px solid var(--border);padding:14px;">
+        <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Sanity Studio — Материалы</div>
+        <div id="cmsPostList"></div>
+        <button class="btn btn-secondary mt-16" style="font-size:11px;width:100%;" onclick="addCmsPost()">+ Новый материал</button>
+      </div>
+      <div style="padding:20px;" id="cmsArticleView"></div>
+    </div>
+    <div style="background:var(--surface);border-top:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:16px;font-size:12px;color:var(--muted);">
+      <span>⚡ Astro 4 · Lighthouse: <strong style="color:var(--green);">98</strong></span>
+      <span>📦 Sanity CMS · Webhook → GitHub Actions</span>
+      <span>🚀 Сборка: <strong style="color:var(--navy);">~90 сек</strong></span>
+    </div>
+  </div>
+
+  <div class="two-col mt-20">
+    <div>
+      <div class="arch">
+        <div class="arch-layer">
+          <div class="arch-layer-label">Фронтенд</div>
+          <div class="arch-nodes">
+            <span class="arch-node">Astro 4</span>
+            <span class="arch-node">TypeScript</span>
+            <span class="arch-node">Tailwind CSS</span>
+          </div>
+        </div>
+        <div class="arch-arrow">↕ API</div>
+        <div class="arch-layer">
+          <div class="arch-layer-label">Headless CMS</div>
+          <div class="arch-nodes">
+            <span class="arch-node">Sanity Studio</span>
+            <span class="arch-node">REST / GROQ</span>
+          </div>
+        </div>
+        <div class="arch-arrow">↕ Webhook</div>
+        <div class="arch-layer">
+          <div class="arch-layer-label">CI/CD</div>
+          <div class="arch-nodes">
+            <span class="arch-node">GitHub Actions</span>
+            <span class="arch-node">Nginx / VPS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cards" style="grid-template-columns:1fr;gap:10px;">
+      <div class="card card-on-alt">
+        <h3>Почему Astro</h3>
+        <p>Статические HTML-страницы = мгновенная загрузка. Интерактивные виджеты — только где нужно (Islands).</p>
+      </div>
+      <div class="card card-on-alt">
+        <h3>Sanity для редакции</h3>
+        <p>Сотрудники публикуют новости и изменения в расписании без разработчика, прямо из браузера.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== S9: 152-FZ ===== -->
+<div class="sec-wrap" id="s9" style="scroll-margin-top:58px;">
+<div class="section">
+  <div class="sec-num">09 · Соответствие 152-ФЗ и архитектурная документация</div>
+  <h2>Защита персональных данных и архитектура системы</h2>
+  <p class="sec-intro">Все персональные данные обрабатываются на серверах в РФ. Согласие, журнал доступа, шифрование при передаче, уведомление Роскомнадзора.</p>
+
+  <div class="two-col" style="margin-bottom:28px;">
+    <div>
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:14px;">Требования 152-ФЗ — чеклист</h3>
+      <div class="steps">
+        <div class="step"><div class="step-n done">✓</div><div><h4>Серверы в РФ (ст. 18.1)</h4><p>VPS Selectel, S3 Yandex Cloud — только российские ЦОД</p></div></div>
+        <div class="step"><div class="step-n done">✓</div><div><h4>Согласие на обработку ПДн</h4><p>Чекбокс в форме, ссылка на политику, хранение согласий</p></div></div>
+        <div class="step"><div class="step-n done">✓</div><div><h4>Политика конфиденциальности</h4><p>Опубликована, описывает цели и сроки обработки</p></div></div>
+        <div class="step"><div class="step-n done">✓</div><div><h4>Шифрование — TLS 1.2+</h4><p>HTTPS обязателен, данные формы не передаются по HTTP</p></div></div>
+        <div class="step"><div class="step-n done">✓</div><div><h4>Журнал доступа к ПДн</h4><p>Каждый просмотр и изменение записывается в лог</p></div></div>
+        <div class="step"><div class="step-n">!</div><div><h4>Уведомление Роскомнадзора</h4><p>Подано уведомление об операторе ПДн (ст. 22)</p></div></div>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:14px;">Архитектурная документация</h3>
+      <table class="table">
+        <thead><tr><th>Документ</th><th>Статус</th></tr></thead>
+        <tbody>
+          <tr><td>Архитектурная схема C4 (L1–L2)</td><td><span class="badge badge-green">✓ Готово</span></td></tr>
+          <tr><td>Модель угроз (методология ФСТЭК)</td><td><span class="badge badge-amber">В работе</span></td></tr>
+          <tr><td>ТЗ по ГОСТ 34.602-2020</td><td><span class="badge badge-blue">Планируется</span></td></tr>
+          <tr><td>Регламент резервного копирования</td><td><span class="badge badge-green">✓ Готово</span></td></tr>
+          <tr><td>Инструкция администратора ИС</td><td><span class="badge badge-amber">В работе</span></td></tr>
+          <tr><td>Политика информационной безопасности</td><td><span class="badge badge-blue">Планируется</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px;font-weight:600;margin-bottom:14px;">Архитектура системы — C4 Level 1</h3>
+  <div class="arch">
+    <div style="display:grid;grid-template-columns:1fr 2fr 1fr;gap:16px;align-items:center;text-align:center;">
+      <div class="arch-layer">
+        <div class="arch-layer-label">Пользователи</div>
+        <div class="arch-nodes" style="flex-direction:column;align-items:flex-start;">
+          <span class="arch-node">Иностранный гражданин</span>
+          <span class="arch-node">Работодатель</span>
+          <span class="arch-node">Сотрудник МВД</span>
+        </div>
+      </div>
+      <div style="border:2px solid #F59E0B;border-radius:10px;padding:16px;">
+        <div class="arch-layer-label">Платформа МВД</div>
+        <div class="arch-nodes" style="justify-content:center;margin-bottom:8px;">
+          <span class="arch-node">Лендинг (Webflow)</span>
+          <span class="arch-node">Портал (Bitrix)</span>
+        </div>
+        <div class="arch-nodes" style="justify-content:center;">
+          <span class="arch-node">CMS-сайт (Astro)</span>
+          <span class="arch-node">БД СКУД</span>
+        </div>
+      </div>
+      <div class="arch-layer">
+        <div class="arch-layer-label">Внешние системы</div>
+        <div class="arch-nodes" style="flex-direction:column;align-items:flex-start;">
+          <span class="arch-node">ЕСИА (Госуслуги)</span>
+          <span class="arch-node">МВД ЦБДУИГ</span>
+          <span class="arch-node">Роскомнадзор</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="privacy" style="background:var(--blue-bg);border:1px solid var(--blue-border);border-radius:var(--radius);padding:20px;margin-top:24px;">
+    <h3 style="font-size:15px;font-weight:600;color:var(--navy);margin-bottom:10px;">Политика конфиденциальности (кратко)</h3>
+    <p style="font-size:13px;color:var(--muted);line-height:1.65;">Настоящая платформа обрабатывает персональные данные в соответствии с Федеральным законом №152-ФЗ «О персональных данных». Данные хранятся исключительно на серверах, расположенных на территории Российской Федерации. Срок хранения персональных данных — не более срока, необходимого для выполнения целей обработки. Субъект ПДн вправе отозвать согласие, направив заявление по адресу организации. Ответственный за обработку ПДн — начальник миграционного пункта.</p>
+  </div>
+</div>
+</div>
+
+<footer>
+  <strong>Миграционный пункт МВД России</strong><br>
+  <span>Практическая работа 2026 · Все персональные данные обрабатываются на серверах РФ · 152-ФЗ</span>
+  <div class="footer-links">
+    <a href="#privacy">Политика конфиденциальности</a>
+    <a href="#s9">Архитектурная документация</a>
+    <a href="#s2">Резервное копирование</a>
+    <a href="#s1">Технические сведения</a>
+  </div>
+</footer>
+
+<style>
+.bx-item { padding: 8px 14px; font-size: 12px; color: var(--muted); cursor: pointer; display: flex; align-items: center; gap: 6px; transition: background .1s; }
+.bx-item:hover { background: rgba(0,0,0,0.04); }
+.bx-item.active { background: var(--blue-bg); color: var(--blue); font-weight: 600; }
+.cms-post { padding: 10px 12px; border-radius: 8px; cursor: pointer; margin-bottom: 4px; border: 1px solid transparent; transition: all .15s; }
+.cms-post:hover { background: var(--blue-bg); border-color: var(--blue-border); }
+.cms-post.active { background: var(--blue-bg); border-color: var(--blue-border); }
+.cms-post-title { font-size: 13px; font-weight: 500; color: var(--navy); }
+.cms-post-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+</style>
+
+<script>
+// DARK MODE
+function toggleDark() {
+  document.body.classList.toggle('dark');
+  localStorage.setItem('dark', document.body.classList.contains('dark'));
+}
+if (localStorage.getItem('dark') === 'true') document.body.classList.add('dark');
+
+// COOKIE
+function acceptCookies() {
+  localStorage.setItem('cookies', 'accepted');
+  document.getElementById('cookieBanner').classList.add('hidden');
+  startStats();
+}
+function declineCookies() {
+  localStorage.setItem('cookies', 'declined');
+  document.getElementById('cookieBanner').classList.add('hidden');
+}
+if (localStorage.getItem('cookies')) {
+  document.getElementById('cookieBanner').classList.add('hidden');
+  if (localStorage.getItem('cookies') === 'accepted') startStats();
+}
+
+// COUNTERS
+function countUp(el, target, suffix) {
+  let current = 0;
+  const step = Math.ceil(target / 40);
+  const timer = setInterval(() => {
+    current = Math.min(current + step, target);
+    el.textContent = current + (suffix || '');
+    if (current >= target) clearInterval(timer);
+  }, 30);
+}
+
+function startStats() {
+  countUp(document.getElementById('counterApps'), 1247, '');
+  countUp(document.getElementById('counterVisitors'), 348, '');
+}
+setTimeout(startStats, 500);
+
+// SERVER CHECK
+function checkServer() {
+  const btn = event.target;
+  btn.textContent = '⏳ Проверяем...';
+  btn.disabled = true;
+  setTimeout(() => {
+    document.getElementById('lastBackup').textContent = 'Сегодня ' + new Date().toTimeString().slice(0,5);
+    btn.textContent = '✓ Всё работает';
+    btn.disabled = false;
+    setTimeout(() => { btn.textContent = '🔄 Проверить статус'; }, 2000);
+  }, 1200);
+}
+
+// BACKUP LOG
+function runBackup() {
+  const log = document.getElementById('backupLog');
+  const now = new Date();
+  const t = now.toTimeString().slice(0,8);
+  const lines = [
+    [t, 'info', '[INFO] Запуск ручного дампа skud_db...'],
+    [t, 'ok', '[OK] Дамп завершён: 251 МБ'],
+    [t, 'info', '[INFO] Шифрование AES-256...'],
+    [t, 'ok', '[OK] Выгрузка в S3: s3://mvd-backup/manual_' + now.toISOString().slice(0,10) + '.enc'],
+    [t, 'ok', '[OK] Резервная копия сохранена'],
+  ];
+  let i = 0;
+  const iv = setInterval(() => {
+    if (i >= lines.length) { clearInterval(iv); return; }
+    const [time, type, msg] = lines[i];
+    const div = document.createElement('div');
+    div.className = 'log-line';
+    div.innerHTML = `<span class="log-time">${time}</span><span class="log-${type}">${msg}</span>`;
+    log.appendChild(div);
+    log.scrollTop = log.scrollHeight;
+    i++;
+  }, 400);
+  const cnt = document.getElementById('backupCount');
+  cnt.textContent = parseInt(cnt.textContent) + 1;
+}
+
+// CHART
+const weekData = [
+  {l:'Пн',v:267},{l:'Вт',v:312},{l:'Ср',v:288},{l:'Чт',v:341},{l:'Пт',v:295},{l:'Сб',v:89},{l:'Вс',v:54}
+];
+const monthData = [
+  {l:'1н',v:1420},{l:'2н',v:1680},{l:'3н',v:1590},{l:'4н',v:1840}
+];
+
+function renderChart(data) {
+  const bars = document.getElementById('chartBars');
+  const labels = document.getElementById('chartLabels');
+  const max = Math.max(...data.map(d => d.v));
+  bars.innerHTML = '';
+  labels.innerHTML = '';
+  data.forEach(d => {
+    const h = Math.round((d.v / max) * 90);
+    bars.innerHTML += `<div class="bar-col"><div class="bar-fill" style="height:${h}px"><div class="bar-tip">${d.v}</div></div></div>`;
+    labels.innerHTML += `<span class="bar-lbl" style="flex:1;text-align:center;">${d.l}</span>`;
+  });
+}
+function updateChart(period) {
+  renderChart(period === 'week' ? weekData : monthData);
+}
+renderChart(weekData);
+
+// SOURCES & DEVICES
+document.getElementById('sourceList').innerHTML = [
+  ['Прямые переходы', '42%'],
+  ['Поисковые системы', '35%'],
+  ['Госуслуги', '18%'],
+  ['Другое', '5%'],
+].map(([l,v]) => `<div style="display:flex;justify-content:space-between;font-size:13px;padding:7px 0;border-bottom:1px solid var(--border)"><span>${l}</span><span class="badge badge-blue">${v}</span></div>`).join('');
+
+document.getElementById('deviceList').innerHTML = [
+  ['Смартфон', '61%'],
+  ['Компьютер', '33%'],
+  ['Планшет', '6%'],
+].map(([l,v]) => `<div style="display:flex;justify-content:space-between;font-size:13px;padding:7px 0;border-bottom:1px solid var(--border)"><span>${l}</span><span class="badge badge-green">${v}</span></div>`).join('');
+
+// FORM
+let currentStep = 1;
+function showStep(n) {
+  [1,2,3].forEach(i => {
+    const el = document.getElementById('step'+i);
+    if (el) el.style.display = i === n ? '' : 'none';
+  });
+  const bars = document.querySelectorAll('.pb-step');
+  bars.forEach((b,i) => {
+    b.className = 'pb-step';
+    if (i < n-1) b.classList.add('done');
+    else if (i === n-1) b.classList.add('active');
+  });
+  document.getElementById('stepLabel').textContent = `Шаг ${n} из 3 — ${['Тип заявителя','Паспортные данные','Адрес и контакт'][n-1]}`;
+  currentStep = n;
+}
+
+function nextStep(from) {
+  if (from === 1) {
+    let ok = true;
+    if (!document.getElementById('applicantType').value) { document.getElementById('err-type').classList.add('show'); ok=false; } else { document.getElementById('err-type').classList.remove('show'); }
+    if (!document.getElementById('purposeType').value) { document.getElementById('err-purpose').classList.add('show'); ok=false; } else { document.getElementById('err-purpose').classList.remove('show'); }
+    if (ok) showStep(2);
+  } else if (from === 2) {
+    let ok = true;
+    const pp = document.getElementById('passport').value.replace(/\s/g,'');
+    if (!/^\d{10}$/.test(pp)) { document.getElementById('err-passport').classList.add('show'); document.getElementById('passport').classList.add('error'); ok=false; }
+    else { document.getElementById('err-passport').classList.remove('show'); document.getElementById('passport').classList.remove('error'); }
+    if (!document.getElementById('birthDate').value) { document.getElementById('err-birth').classList.add('show'); ok=false; } else { document.getElementById('err-birth').classList.remove('show'); }
+    if (!document.getElementById('citizenship').value) { document.getElementById('err-citizenship').classList.add('show'); ok=false; } else { document.getElementById('err-citizenship').classList.remove('show'); }
+    if (ok) showStep(3);
+  }
+}
+function prevStep(from) { showStep(from-1); }
+
+function submitForm() {
+  let ok = true;
+  if (!document.getElementById('address').value) { document.getElementById('err-address').classList.add('show'); ok=false; } else { document.getElementById('err-address').classList.remove('show'); }
+  if (!document.getElementById('stayUntil').value) { document.getElementById('err-stay').classList.add('show'); ok=false; } else { document.getElementById('err-stay').classList.remove('show'); }
+  const email = document.getElementById('emailField').value;
+  if (!email || !email.includes('@')) { document.getElementById('err-email').classList.add('show'); ok=false; } else { document.getElementById('err-email').classList.remove('show'); }
+  if (!ok) return;
+  [1,2,3].forEach(i => { const el=document.getElementById('step'+i); if(el) el.style.display='none'; });
+  document.querySelector('.progress-bar').style.display = 'none';
+  document.querySelector('.pb-label').style.display = 'none';
+  document.getElementById('formSuccess').classList.add('show');
+  const ticket = 'МВД-' + Math.floor(Math.random()*90000+10000);
+  document.getElementById('ticketNum').textContent = ticket;
+  // update counter
+  const c = document.getElementById('counterApps');
+  countUp(c, parseInt(c.textContent.replace(/\D/g,'')) + 1, '');
+}
+
+function resetForm() {
+  document.getElementById('formSuccess').classList.remove('show');
+  document.querySelector('.progress-bar').style.display = '';
+  document.querySelector('.pb-label').style.display = '';
+  ['applicantType','purposeType','passport','birthDate','citizenship','address','stayUntil','emailField'].forEach(id => {
+    const el = document.getElementById(id); if(el) el.value = '';
+  });
+  showStep(1);
+}
+
+// FAQ
+const faqs = [
+  ['Нужна ли виза для постановки на учёт?', 'Зависит от гражданства. Граждане СНГ въезжают без визы. Документ-основание — миграционная карта.'],
+  ['Сколько дней есть на постановку на учёт?', 'По общему правилу — 7 рабочих дней с момента прибытия. Для граждан Белоруссии — 90 дней.'],
+  ['Можно ли продлить постановку на учёт?', 'Да, при наличии оснований: трудовой договор, обучение, лечение.'],
+];
+document.getElementById('faqList').innerHTML = faqs.map(([q,a],i) =>
+  `<div style="border:1px solid var(--border);border-radius:8px;margin-bottom:8px;overflow:hidden;">
+    <div style="padding:10px 14px;font-size:13px;font-weight:500;cursor:pointer;display:flex;justify-content:space-between;align-items:center;" onclick="toggleFaq(${i})">
+      <span>${q}</span><span id="faqIcon${i}">▼</span>
+    </div>
+    <div id="faqAns${i}" style="display:none;padding:10px 14px;font-size:13px;color:var(--muted);border-top:1px solid var(--border);background:var(--surface);">${a}</div>
+  </div>`
+).join('');
+function toggleFaq(i) {
+  const el = document.getElementById('faqAns'+i);
+  const ic = document.getElementById('faqIcon'+i);
+  const shown = el.style.display !== 'none';
+  el.style.display = shown ? 'none' : '';
+  ic.textContent = shown ? '▼' : '▲';
+}
+
+// BITRIX TABS
+function switchBxTab(tab, el) {
+  document.querySelectorAll('.bx-item').forEach(e => e.classList.remove('active'));
+  el.classList.add('active');
+  ['docs','schedule','forms','ldap'].forEach(t => {
+    const e = document.getElementById('bx-'+t);
+    if (e) e.style.display = t===tab ? '' : 'none';
+  });
+}
+
+// ASTRO CMS
+const cmsPosts = [
+  { title: 'Новые правила учёта ИГ', date: '27.06.2026', status: 'Опубликовано', body: 'С 1 июля вступают в силу изменения в порядке подачи уведомлений. Принимающая сторона обязана уведомить орган в течение 7 рабочих дней с момента прибытия иностранного гражданина на территорию РФ. Изменения касаются также перечня документов — теперь достаточно копии миграционной карты.' },
+  { title: 'График приёма — июль 2026', date: '25.06.2026', status: 'Черновик', body: 'В июле 2026 года приём граждан осуществляется с понедельника по пятницу. Понедельник и среда — утренние часы (09:00–13:00), вторник и четверг — вечерние (14:00–18:00). Пятница — только предварительная запись.' },
+  { title: 'FAQ: патент или разрешение?', date: '10.06.2026', status: 'Опубликовано', body: 'Трудовой патент оформляется гражданами «визовых» государств для работы у физических лиц и ИП. Разрешение на работу — для работы в организациях. Гражданам стран ЕАЭС (Армения, Белоруссия, Казахстан, Киргизия) трудовые разрешения не требуются.' },
+];
+let activeCmsPost = 0;
+
+function renderCms() {
+  document.getElementById('cmsPostList').innerHTML = cmsPosts.map((p,i) =>
+    `<div class="cms-post ${i===activeCmsPost?'active':''}" onclick="selectPost(${i})">
+      <div class="cms-post-title">${p.title}</div>
+      <div class="cms-post-meta">${p.date} · <span style="color:${p.status==='Опубликовано'?'var(--green)':'var(--gold)'}">${p.status}</span></div>
+    </div>`
+  ).join('');
+  const p = cmsPosts[activeCmsPost];
+  document.getElementById('cmsArticleView').innerHTML =
+    `<div style="font-size:11px;color:var(--accent);letter-spacing:1px;text-transform:uppercase;font-weight:600;margin-bottom:8px;">Astro · Sanity CMS</div>
+     <div style="font-size:18px;font-weight:700;color:var(--navy);margin-bottom:8px;">${p.title}</div>
+     <div style="font-size:12px;color:var(--muted);margin-bottom:14px;display:flex;gap:12px;">
+       <span>📅 ${p.date}</span>
+       <span style="color:${p.status==='Опубликовано'?'var(--green)':'var(--gold)'}">${p.status==='Опубликовано'?'✓':'✎'} ${p.status}</span>
+     </div>
+     <div style="font-size:14px;color:var(--muted);line-height:1.7;">${p.body}</div>
+     <div style="margin-top:14px;display:flex;gap:8px;">
+       <span class="badge badge-green" style="font-size:11px;">Lighthouse 98</span>
+       <span class="badge badge-blue" style="font-size:11px;">Astro Island</span>
+       <span class="badge badge-amber" style="font-size:11px;">Webhook → rebuild</span>
+     </div>`;
+}
+function selectPost(i) { activeCmsPost = i; renderCms(); }
+function addCmsPost() {
+  cmsPosts.push({ title: 'Новый материал ' + (cmsPosts.length+1), date: new Date().toLocaleDateString('ru'), status: 'Черновик', body: 'Начните редактировать материал в Sanity Studio...' });
+  activeCmsPost = cmsPosts.length - 1;
+  renderCms();
+}
+renderCms();
+
+// SEC NAV ACTIVE
+const secNavLinks = document.querySelectorAll('.sec-nav a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      secNavLinks.forEach(a => a.classList.remove('active'));
+      const link = document.querySelector(`.sec-nav a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-40% 0px -50% 0px' });
+document.querySelectorAll('.sec-wrap, .sec-wrap-alt').forEach(s => {
+  if (s.id) observer.observe(s);
+  const inner = s.querySelector('[id]');
+  if (inner) observer.observe(inner);
+});
+
+// Uptime live tick
+setInterval(() => {
+  const el = document.getElementById('uptimeLabel');
+  el.style.opacity = el.style.opacity === '0.3' ? '1' : '0.3';
+}, 2000);
+</script>
+</body>
+</html>
